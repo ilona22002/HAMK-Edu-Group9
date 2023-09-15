@@ -1,0 +1,31 @@
+header{
+    background-color: beige;
+    margin-top: -16px;
+    padding-top: 15px; 
+    margin-left: -10px;
+    padding-left: 20px;
+    margin: -10px;
+    padding-bottom: 100px;
+}
+
+
+body {
+    background-color:gray;
+    
+}
+
+.column1 {
+    float: float; 
+    width: 50%;
+    padding-left: 20px; 
+}
+
+.column2 {
+    float: right; 
+    width: 50%;
+    padding-left: 20px;
+}
+
+
+.column2 label {
+    margin-right: 30px;}
