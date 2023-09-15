@@ -3,16 +3,6 @@
 $title = "First page";?>
 <!DOCTYPE html>
 <html lang="en">
- 
-
-<body>
-   
-     
-
-</body>
-    
-    
-
 <div class="container">
     <div class="column">
         <h2>Learnwell English (Project) (2)</h2>
