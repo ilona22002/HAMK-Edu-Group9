@@ -8,7 +8,7 @@ $title = "First page";?>
 <body>
    
      
-</main>
+
 </body>
     
     
