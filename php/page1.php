@@ -2,7 +2,6 @@
 <?php
 $title = "First page";?>
 <!DOCTYPE html>
-<html lang="en">
 <div class="container">
     <div class="column">
         <h2>Learnwell English (Project) (2)</h2>
@@ -52,6 +51,7 @@ $title = "First page";?>
         }
         $conn->close();
         ?>
+        <input type="submit" value="Submit">
 
 
 
