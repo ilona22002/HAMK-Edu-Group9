@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "<h1>Ответы:</h1>";
+    echo "<h1>answers:</h1>";
     echo "<ul>";
 
     foreach ($_POST['answers'] as $question => $answer) {
