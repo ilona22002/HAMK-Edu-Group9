@@ -23,14 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $question = mysqli_real_escape_string($conn, $question);
         $answer = mysqli_real_escape_string($conn, $answer);
 
-        echo "<li>Вопрос $question: $answer</li>";
+        echo "<li>question $question: $answer</li>";
     }
 
     echo "</ul>";
 }
 ?>
 
-<?php include "header.php" ?>
+
 
 <p><a href="page1.php">back</a></p>
 

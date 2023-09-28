@@ -33,7 +33,13 @@ $title = "First page";
             $questionCount = 0; 
             while ($row = $result->fetch_assoc()) {
                 $questionCount++;
+                echo "<fieldset>";
+                echo "<legend>Question $questionCount:</legend>";
                 echo "<div class='item'>";
+                
+                echo "<div class='column1'>"; 
+                echo "<p class='line'>" . $row["question"] . "</p>";
+                echo "</div>";
                 echo "<div class='column2'>"; 
                 for ($i = 1; $i <= 5; $i++) {
                     $optionValue = $i; 
@@ -43,10 +49,8 @@ $title = "First page";
                     echo "<input type='radio' name='$inputName' value='$optionValue' id='$inputId'>";
                 }
                 echo "</div>";
-                echo "<div class='column1'>"; 
-                echo "<p class='line'>" . $row["question"] . "</p>";
                 echo "</div>";
-                echo "</div>";
+                echo "</fieldset>";
             }
         } else {
             echo "Error " . $conn->error;
