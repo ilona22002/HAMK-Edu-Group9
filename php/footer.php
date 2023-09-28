@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 
-</div> 
-</div>
+</main>
 </body>
 </html>
->>>>>>> Stashed changes
+
