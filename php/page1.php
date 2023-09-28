@@ -1,15 +1,21 @@
+<?php
+session_start(); 
+?>
+
 <?php include "header.php" ?>
 <?php
-$title = "First page";?>
+$title = "First page";
+?>
 <!DOCTYPE html>
 <div class="container">
     <div class="column">
         <h2>Learnwell English (Project) (2)</h2>
+        <form method="post" action="process_answers.php"> 
         <?php
         $servername = "sql11.freemysqlhosting.net";
-        $username = "sql11646400";
-        $password = "te3DQQPTlD";
-        $dbname = "sql11646400";
+        $username = "sql11649135";
+        $password = "YHHTfDSg5T";
+        $dbname = "sql11649135";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -19,40 +25,38 @@ $title = "First page";?>
 
         $conn->set_charset("utf8");
 
-        $sql = "SELECT `COL 3` FROM `TABLE 1`"; 
+        $sql = "SELECT `question` FROM `TABLE 3`"; 
 
         $result = $conn->query($sql);
 
         if ($result) {
-            if ($result->num_rows > 0) {
-                $firstRowSkipped = false; 
-                while ($row = $result->fetch_assoc()) {
-                    if ($firstRowSkipped) { 
-                        echo "<div class='item'>";
-                        echo "<div class='column2'>"; 
-                        for ($i = 1; $i <= 5; $i++) {
-                            echo "<label for='scale".$row["COL 3"]."_$i'></label>";
-                            echo "<input type='radio' name='answer_".$row["COL 3"]."' value='$i' id='scale".$row["COL 3"]."_$i'>";
-                        }
-                        echo "</div>";
-                        echo "<div class='column1'>"; 
-                        echo "<p class='line'>" . $row["COL 3"] . "</p>";
-                        echo "</div>";
-                        echo "</div>";
-                    } else {
-                        $firstRowSkipped = true;
-                    }
+            $questionCount = 0; 
+            while ($row = $result->fetch_assoc()) {
+                $questionCount++;
+                echo "<div class='item'>";
+                echo "<div class='column2'>"; 
+                for ($i = 1; $i <= 5; $i++) {
+                    $optionValue = $i; 
+                    $inputName = 'answers[' . $questionCount . ']'; 
+                    $inputId = 'scale' . $questionCount . '_' . $i; 
+                    echo "<label for='$inputId'>$optionValue</label>";
+                    echo "<input type='radio' name='$inputName' value='$optionValue' id='$inputId'>";
                 }
-            } else {
-                echo "No data";
+                echo "</div>";
+                echo "<div class='column1'>"; 
+                echo "<p class='line'>" . $row["question"] . "</p>";
+                echo "</div>";
+                echo "</div>";
             }
         } else {
             echo "Error " . $conn->error;
         }
         $conn->close();
         ?>
+        
         <input type="submit" value="Submit">
-
-
+        </form> 
+    </div>
+</div>
 
 <?php include "footer.php" ?>
