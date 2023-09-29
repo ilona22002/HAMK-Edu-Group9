@@ -7,10 +7,15 @@ session_start();
 $title = "First page";
 ?>
 <!DOCTYPE html>
+
+<html lang="en">
+ 
+
 <div class="container">
     <div class="column">
         <h2>Learnwell English (Project) (2)</h2>
-        <form method="post" action="process_answers.php"> 
+      <form method="post" action="process_answers.php">
+
         <?php
         $servername = "sql11.freemysqlhosting.net";
         $username = "sql11649135";
@@ -57,10 +62,10 @@ $title = "First page";
         }
         $conn->close();
         ?>
-        
         <input type="submit" value="Submit">
         </form> 
     </div>
 </div>
 
 <?php include "footer.php" ?>
+
