@@ -30,9 +30,8 @@ $title = "First page";
         $result = $conn->query($sql);
 
         if ($result) {
-            $questionCount = 0; 
+            $questionCount = 1; 
             while ($row = $result->fetch_assoc()) {
-                $questionCount++;
                 echo "<fieldset>";
                 echo "<legend>Question $questionCount:</legend>";
                 echo "<div class='item'>";
@@ -51,6 +50,7 @@ $title = "First page";
                 echo "</div>";
                 echo "</div>";
                 echo "</fieldset>";
+                $questionCount++;
             }
         } else {
             echo "Error " . $conn->error;
