@@ -30,7 +30,7 @@ $title = "First page";
 
         $conn->set_charset("utf8");
 
-        $sql = "SELECT `question` FROM `TABLE 3`"; 
+        $sql = "SELECT `COL 3` FROM `TABLE 3`"; 
 
         $result = $conn->query($sql);
 
@@ -43,7 +43,7 @@ $title = "First page";
                 echo "<div class='item'>";
                 
                 echo "<div class='column1'>"; 
-                echo "<p class='line'>" . $row["question"] . "</p>";
+                echo "<p class='line'>" . $row["COL 3"] . "</p>";
                 echo "</div>";
                 echo "<div class='column2'>"; 
                 for ($i = 1; $i <= 5; $i++) {
