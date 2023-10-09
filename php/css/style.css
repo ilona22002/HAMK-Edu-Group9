@@ -1,10 +1,14 @@
 
 
 body {
-    background-color:rgb(184, 184, 184);
     color: rgb(40, 40, 40);
 
     font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 
 
@@ -31,59 +35,6 @@ body {
 
 .column2 label {
     margin-right: 60px;
-}
-
-
-
-
-.speedometer {
-    padding-top: 50px;
-    padding-left: 100px;
-    width: 180px;
-    text-align: center;
-    position: relative; 
-}
-
-.dial {
-    width: 180px;
-    height: 90px; 
-    background: lightgreen;
-    border-top-left-radius: 100px; 
-    border-top-right-radius: 100px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-
-.needle {
-    transform-origin: 50% 100%;
-    position: absolute;
-    bottom: -45px; 
-    left: 50%;
-    transform: translateX(-50%) rotate(0deg);  
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-
-#needle1 {
-    background-color: #FF5733; 
-    width: 4px;
-    height: 90px;
-}
-
-#needle2 {
-    background-color: #3347ff; 
-    width: 4px;
-    height: 90px;
-}
-
-
-
-.speed-value {
-    margin-top: 20px;
-    font-size: 24px;
 }
 
 

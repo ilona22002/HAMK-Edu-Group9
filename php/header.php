@@ -9,9 +9,8 @@
     <html lang="en">
   
   
-  
+    <script src="script.js"></script>
     <link rel="shortcut icon" href="C:\Users\evgen\OneDrive\Рабочий стол\ezgif.com-webp-to-jpg.jpg" type="image/x-icon">
-
 </head>
 <body>
     <header>

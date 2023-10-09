@@ -1,49 +1,55 @@
 <?php
 session_start();
+?>
+<?php include "header.php" ?>
+<link rel="stylesheet" href="css/process_answers.css">
 
-$servername = "sql11.freemysqlhosting.net";
-$username = "sql11649135";
-$password = "YHHTfDSg5T";
-$dbname = "sql11649135";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection error " . $conn->connect_error);
-}
-
-$conn->set_charset("utf8");
-
+<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $sums = array();
-    $counts = array();
+    $mysqli = new mysqli("sql11.freemysqlhosting.net", "sql11649135", "YHHTfDSg5T", "sql11649135");
 
-    foreach ($_POST['answers'] as $question => $answer) {
-        $question = mysqli_real_escape_string($conn, $question);
-        $answer = mysqli_real_escape_string($conn, $answer);
-
-        $group = ceil($question / 5); 
-
-        if (!isset($sums[$group])) {
-            $sums[$group] = 0;
-            $counts[$group] = 0;
-        }
-        $sums[$group] += $answer;
-        $counts[$group]++;
+    if ($mysqli->connect_error) {
+        die("Error: " . $mysqli->connect_error);
     }
 
-    echo "<h1>Average:</h1>";
-    echo "<ul>";
+    $sql = "INSERT INTO answ (`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    foreach ($sums as $group => $sum) {
-        $average = $sum / $counts[$group];
-        echo "<li>Average " . (($group - 1) * 5 + 1) . " - " . ($group * 5) . ": $average</li>";
+    $stmt = $mysqli->prepare($sql);
+
+    foreach ($_POST['answers'] as $question => $answer) {
+        $stmt->bind_param("ssss...", $answer, $answer, $answer, ..., $answer);
+        $stmt->execute();
+    }
+
+    $stmt->close();
+    $mysqli->close();
+
+    echo "<h1>Selected Answers:</h1><ul>";
+
+    foreach ($_POST['answers'] as $question => $answer) {
+        $question = htmlspecialchars($question);
+        $answer = htmlspecialchars($answer);
+
+        echo "<li>Question: $question - Answer: $answer</li>";
     }
 
     echo "</ul>";
 }
 ?>
 
-<p><a href="page1.php">Назад</a></p>
+<div class="container">
+    <div class="column">
+        <p><a href="page1.php">Назад</a></p>
+    </div>
+
+    <div class="column">
+        <div class="wrapper">
+            <div class="circle-out">
+                <div id="bar" class="circle"></div>
+                <span class="text" id="value">1</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include "footer.php" ?>

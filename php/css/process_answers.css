@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.column {
+    width: 48%; 
+    padding: 10px;
+}
+
+.wrapper {
+    overflow: hidden;
+}
+
+.circle {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-top-left-radius: 380px;
+    border-top-right-radius: 380px;
+    border: 100px solid pink;
+    border-bottom: 0;
+    transform-origin: bottom;
+    position: absolute;
+    z-index: 1;
+    transform: rotate(-180deg);
+    bottom: 0;
+    left: -100px;
+}
+
+.circle-out {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-top-left-radius: 380px;
+    border-top-right-radius: 380px;
+    border: 100px solid #ededed;
+    border-bottom: 0;
+    position: relative;
+}
+
+.text {
+    font-size: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+}
