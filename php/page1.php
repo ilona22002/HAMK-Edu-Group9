@@ -29,26 +29,29 @@ $title = "First page";
 
             $conn->set_charset("utf8");
 
-            $sql = "SELECT `question`, `subcategory`, `category` FROM `TABLE 3` ORDER BY `category`";
+            $sql = "SELECT `question`, `subcategory`, `category` FROM `TABLE 3` ORDER BY `category`, `subcategory`, `question_id`";
 
             $result = $conn->query($sql);
 
             if ($result) {
                 $currentCategory = "";
                 $questionCount = 0;
+                $currentContainerStarted = false;
+
                 while ($row = $result->fetch_assoc()) {
                     $questionCount++;
                     $category = $row["subcategory"];
                     $question = $row["question"];
 
                     if ($currentCategory !== $category) {
-                        if ($currentCategory !== "") {
+                        if ($currentContainerStarted) {
                             echo "</div>";
                             echo "<hr>";
                         }
                         echo "<h3>$category</h3>";
                         echo "<div class='item'>";
                         $currentCategory = $category;
+                        $currentContainerStarted = true;
                     }
 
                     echo "<fieldset>";
@@ -67,7 +70,10 @@ $title = "First page";
                     echo "</div>";
                     echo "</fieldset>";
                 }
-                echo "</div>";
+
+                if ($currentContainerStarted) {
+                    echo "</div>";
+                }
             } else {
                 echo "Error " . $conn->error;
             }
