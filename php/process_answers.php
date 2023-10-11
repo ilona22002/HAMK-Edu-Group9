@@ -3,7 +3,6 @@ session_start();
 ?>
 <?php include "header.php" ?>
 <link rel="stylesheet" href="css/process_answers.css">
-<script src="script.js"></script>
 
 <?php
 $selectedAnswers = []; 
@@ -19,6 +18,27 @@ $pdo = new PDO("mysql:host=sql11.freemysqlhosting.net;dbname=sql11649135", "sql1
 $tableName = "answ";
 $columnNames = ["`1`", "`2`", "`3`", "`4`", "`5`", "`6`", "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`", "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`"];
 
+$sqlAvgFirst12 = "SELECT AVG((`1` + `2` + `3` + `4` + `5` + `6` + `7` + `8` + `9` + `10` + `11` + `12`) / 12) AS average_value FROM $tableName";
+$stmtAvgFirst12 = $pdo->query($sqlAvgFirst12);
+$averageResultFirst12 = $stmtAvgFirst12->fetch();
+$averageValueFirst12 = number_format($averageResultFirst12['average_value'], 2);
+
+$sqlAvg13to20 = "SELECT AVG((`13` + `14` + `15` + `16` + `17` + `18` + `19` + `20`) / 8) AS average_value FROM $tableName";
+$stmtAvg13to20 = $pdo->query($sqlAvg13to20);
+$averageResult13to20 = $stmtAvg13to20->fetch();
+$averageValue13to20 = number_format($averageResult13to20['average_value'], 2);
+
+$sqlAvg21 = "SELECT AVG(`21`) AS average_value FROM $tableName";
+$stmtAvg21 = $pdo->query($sqlAvg21);
+$averageResult21 = $stmtAvg21->fetch();
+$averageValue21 = number_format($averageResult21['average_value'], 2);
+
+$sqlAvg22to26 = "SELECT AVG((`22` + `23` + `24` + `25` + `26`) / 5) AS average_value FROM $tableName";
+$stmtAvg22to26 = $pdo->query($sqlAvg22to26);
+$averageResult22to26 = $stmtAvg22to26->fetch();
+$averageValue22to26 = number_format($averageResult22to26['average_value'], 2);
+
+
 $paramPlaceholders = implode(', ', array_fill(0, count($columnNames), '?'));
 
 $sql = "INSERT INTO $tableName (" . implode(', ', $columnNames) . ") VALUES ($paramPlaceholders)";
@@ -27,79 +47,90 @@ $stmt = $pdo->prepare($sql);
 
 $stmt->execute($selectedAnswers);
 ?>
-
 <div class="container">
     <div class="column">
-        <p><a href="page1.php">back</a></p>
         <h1>Your avg:</h1>
         <div class="avg-container">
             <h2>From 1 to 12:</h2>
             <div class="wrapper">
-            <div class="circle-out">
-                <div id="bar1" class="circle"></div>
-                <span class="text" id="value1"><?php echo number_format(array_sum(array_slice($selectedAnswers, 0, 12)) / 12, 2); ?></span>
+                <div class="circle-out">
+                    <div id="bar1" class="circle"></div>
+                    <span class="text" id="value1"><?php echo number_format(array_sum(array_slice($selectedAnswers, 0, 12)) / 12, 2); ?></span>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
 
-    <div class="column">
-        
-    </div>
-</div>
-
-<div class="container">
-    <div class="column">
         <div class="avg-container">
-            <h2>13:</h2>
+            <h2>From 13 to 20:</h2>
             <div class="wrapper">
-            <div class="circle-out">
-                <div id="bar2" class="circle"></div>
-                <span class="text" id="value2"><?php echo $selectedAnswers[12]; ?></span>
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value3"><?php echo number_format(array_sum(array_slice($selectedAnswers, 12, 8)) / 8, 2); ?></span>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
 
-    <div class="column">
-        
-    </div>
-</div>
-
-<div class="container">
-    <div class="column">
         <div class="avg-container">
-            <h2>From 14 to 21:</h2>
+            <h2>21:</h2>
             <div class="wrapper">
-            <div class="circle-out">
-                <div id="bar3" class="circle"></div>
-                <span class="text" id="value3"><?php echo number_format(array_sum(array_slice($selectedAnswers, 13, 8)) / 8, 2); ?></span>
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value4"><?php echo number_format($selectedAnswers[20], 2); ?></span>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
 
-    <div class="column">
-        
-    </div>
-</div>
-
-<div class="container">
-    <div class="column">
         <div class="avg-container">
             <h2>From 22 to 26:</h2>
-            <p><?php echo number_format(array_sum(array_slice($selectedAnswers, 21, 5)) / 5, 2); ?></p>
             <div class="wrapper">
-            <div class="circle-out">
-                <div id="bar4" class="circle"></div>
-                <span class="text" id="value4"><?php echo number_format(array_sum(array_slice($selectedAnswers, 21, 5)) / 5, 2); ?></span>
+                <div class="circle-out">
+                    <div id="bar5" class="circle"></div>
+                    <span class="text" id="value5"><?php echo number_format(array_sum(array_slice($selectedAnswers, 21, 5)) / 5, 2); ?></span>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-
     <div class="column">
-        
+        <h1>Other avg:</h1>
+        <div class="avg-container">
+            <h2>From 1 to 12:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar1" class="circle"></div>
+                    <span class="text" id="value1"><?php echo $averageValueFirst12; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>From 13 to 20:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value3"><?php echo $averageValue13to20; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>21:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value4"><?php echo $averageValue21; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>From 22 to 26:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar5" class="circle"></div>
+                    <span class="text" id="value5"><?php echo $averageValue22to26; ?></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
