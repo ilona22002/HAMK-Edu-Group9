@@ -1,37 +1,161 @@
 <?php
-session_start(); 
+session_start();
+?>
+<?php include "header.php" ?>
+<link rel="stylesheet" href="css/process_answers.css">
 
-
-$servername = "sql11.freemysqlhosting.net";
-$username = "sql11649135";
-$password = "YHHTfDSg5T";
-$dbname = "sql11649135";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection error " . $conn->connect_error);
-}
-
-$conn->set_charset("utf8");
+<?php
+$selectedAnswers = []; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "<h1>answers:</h1>";
-    echo "<ul>";
-
-    foreach ($_POST['answers'] as $question => $answer) {
-        $question = mysqli_real_escape_string($conn, $question);
-        $answer = mysqli_real_escape_string($conn, $answer);
-
-        echo "<li>question $question: $answer</li>";
+    foreach ($_POST['answers'] as $answer) {
+        $selectedAnswers[] = htmlspecialchars($answer); 
     }
-
-    echo "</ul>";
 }
+
+$pdo = new PDO("mysql:host=sql11.freemysqlhosting.net;dbname=sql11649135", "sql11649135", "YHHTfDSg5T");
+
+$tableName = "answ";
+$columnNames = ["`1`", "`2`", "`3`", "`4`", "`5`", "`6`", "`7`", "`8`", "`9`", "`10`", "`11`", "`12`", "`13`", "`14`", "`15`", "`16`", "`17`", "`18`", "`19`", "`20`", "`21`", "`22`", "`23`", "`24`", "`25`", "`26`"];
+
+$sqlAvgFirst12 = "SELECT AVG((`1` + `2` + `3` + `4` + `5` + `6` + `7` + `8` + `9` + `10` + `11` + `12`) / 12) AS average_value FROM $tableName";
+$stmtAvgFirst12 = $pdo->query($sqlAvgFirst12);
+$averageResultFirst12 = $stmtAvgFirst12->fetch();
+$averageValueFirst12 = number_format($averageResultFirst12['average_value'], 2);
+
+$sqlAvg13to20 = "SELECT AVG((`13` + `14` + `15` + `16` + `17` + `18` + `19` + `20`) / 8) AS average_value FROM $tableName";
+$stmtAvg13to20 = $pdo->query($sqlAvg13to20);
+$averageResult13to20 = $stmtAvg13to20->fetch();
+$averageValue13to20 = number_format($averageResult13to20['average_value'], 2);
+
+$sqlAvg21 = "SELECT AVG(`21`) AS average_value FROM $tableName";
+$stmtAvg21 = $pdo->query($sqlAvg21);
+$averageResult21 = $stmtAvg21->fetch();
+$averageValue21 = number_format($averageResult21['average_value'], 2);
+
+$sqlAvg22to26 = "SELECT AVG((`22` + `23` + `24` + `25` + `26`) / 5) AS average_value FROM $tableName";
+$stmtAvg22to26 = $pdo->query($sqlAvg22to26);
+$averageResult22to26 = $stmtAvg22to26->fetch();
+$averageValue22to26 = number_format($averageResult22to26['average_value'], 2);
+
+
+$paramPlaceholders = implode(', ', array_fill(0, count($columnNames), '?'));
+
+$sql = "INSERT INTO $tableName (" . implode(', ', $columnNames) . ") VALUES ($paramPlaceholders)";
+
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute($selectedAnswers);
 ?>
+<div class="container">
+    <div class="column">
+        <h1>Your avg:</h1>
+        <div class="avg-container">
+            <h2>From 1 to 12:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar1" class="circle"></div>
+                    <span class="text" id="value1"><?php echo number_format(array_sum(array_slice($selectedAnswers, 0, 12)) / 12, 2); ?></span>
+                </div>
+            </div>
+        </div>
 
+        <div class="avg-container">
+            <h2>From 13 to 20:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value3"><?php echo number_format(array_sum(array_slice($selectedAnswers, 12, 8)) / 8, 2); ?></span>
+                </div>
+            </div>
+        </div>
 
+        <div class="avg-container">
+            <h2>21:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value4"><?php echo number_format($selectedAnswers[20], 2); ?></span>
+                </div>
+            </div>
+        </div>
 
-<p><a href="page1.php">back</a></p>
+        <div class="avg-container">
+            <h2>From 22 to 26:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar5" class="circle"></div>
+                    <span class="text" id="value5"><?php echo number_format(array_sum(array_slice($selectedAnswers, 21, 5)) / 5, 2); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h1>Other avg:</h1>
+        <div class="avg-container">
+            <h2>From 1 to 12:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar1" class="circle"></div>
+                    <span class="text" id="value1"><?php echo $averageValueFirst12; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>From 13 to 20:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value3"><?php echo $averageValue13to20; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>21:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value4"><?php echo $averageValue21; ?></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg-container">
+            <h2>From 22 to 26:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar5" class="circle"></div>
+                    <span class="text" id="value5"><?php echo $averageValue22to26; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include "footer.php" ?>
+
+<script>
+const bars = document.querySelectorAll(".circle");
+const valueTexts = document.querySelectorAll(".text");
+
+for (let i = 0; i < bars.length; i++) {
+    const bar = bars[i];
+    const valueText = valueTexts[i];
+    
+    if (bar && valueText) {
+        console.log();
+
+        function setProgress() {
+            const value = parseFloat(valueText.textContent);
+
+            const p = 180 - ((value - 1) / 4) * 180;
+
+            bar.style.transform = `rotate(-${p}deg)`;
+        }
+
+        setProgress();
+    }
+}
+</script>
