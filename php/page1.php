@@ -29,7 +29,7 @@ $title = "First page";
 
             $conn->set_charset("utf8");
 
-            $sql = "SELECT `question`, `subcategory`, `category` FROM `TABLE 3` ORDER BY `category`, `subcategory`, `question_id`";
+            $sql = "SELECT `question`, `subcategory`, `category` FROM `Questions` ORDER BY `category`, `subcategory`, `question_id`";
 
             $result = $conn->query($sql);
 
