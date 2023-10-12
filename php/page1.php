@@ -12,7 +12,14 @@ $title = "First page";
 
 <div class="container">
     <div class="column">
-        <h2>Learnwell English (Project) (2)</h2>
+        <h2></h2>
+        <ol class="value">
+            <li>Totally agree</li>
+            <li>Agree</li>
+            <li>In between</li>
+            <li>Disagree</li>
+            <li>Totally disagree</li>
+        </ol> 
         <form method="post" action="process_answers.php" id="quizForm">
 
             <?php
@@ -29,7 +36,7 @@ $title = "First page";
 
             $conn->set_charset("utf8");
 
-            $sql = "SELECT `question`, `subcategory`, `category` FROM `TABLE 3` ORDER BY `category`, `subcategory`, `question_id`";
+            $sql = "SELECT `question`, `subcategory`, `category` FROM `Questions` ORDER BY `category`, `subcategory`, `question_id`";
 
             $result = $conn->query($sql);
 
@@ -79,7 +86,7 @@ $title = "First page";
             }
             $conn->close();
             ?>
-            <input type="submit" value="Submit">
+            <input class="submit" type="submit" value="Submit">
         </form>
     </div>
 </div>
