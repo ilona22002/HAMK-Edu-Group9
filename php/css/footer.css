@@ -1,9 +1,18 @@
 footer {
-    color: #39616E;
+    background-color: #39616E;
     opacity: 1;
     width: 100%;
-    height:325px;
-    text-align: center;
+    height:300px;   
+    color:azure;
+    display: flex;
+    margin-top: 80px;
+}
+
+.row {
+    display:block;
+    box-sizing: border-box;
+    padding: 40px;
+    margin: 60px;
 }
 
 a:link{
