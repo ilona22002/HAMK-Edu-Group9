@@ -32,15 +32,6 @@
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="#">HOME</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">STUDENTS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">APPLICANTS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">CONTACT US</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -65,9 +56,6 @@
           WELCOME TO HAMK EDU</h1>
           <h4 class="mb-3" style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-weight: 600; font-size: 30px; text-shadow: 2px 2px 5px white;">
             LearnWell Questionnaire</h4>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-          >STUDY OPTIONS</a
-          >
         </div>
       </div>
     </div>
