@@ -6,20 +6,18 @@ session_start();
 <?php
 $title = "First page";
 ?>
-<!DOCTYPE html>
 
-<html lang="en">
 
 <div class="container">
     <div class="column">
-        <h2></h2>
-        <ol class="value">
-            <li>Totally agree</li>
-            <li>Agree</li>
-            <li>In between</li>
-            <li>Disagree</li>
-            <li>Totally disagree</li>
-        </ol> 
+        <h2>Learnwell English (Project)</h2>
+        <h5 class="numbers" >
+            1=Totally disagree <br>
+            2=Disagree <br>
+            3=In Between <br>
+            4=Agree <br>
+            5=Totally Agree</h5>
+
         <form method="post" action="process_answers.php" id="quizForm">
 
             <?php
@@ -55,7 +53,9 @@ $title = "First page";
                             echo "</div>";
                             echo "<hr>";
                         }
+
                         echo "<h3>$category</h3>";
+
                         echo "<div class='item'>";
                         $currentCategory = $category;
                         $currentContainerStarted = true;
@@ -71,8 +71,12 @@ $title = "First page";
                         $optionValue = $i;
                         $inputName = 'answers[' . $questionCount . ']';
                         $inputId = 'scale' . $questionCount . '_' . $i;
-                        echo "<label for='$inputId'>$optionValue</label>";
+
+                        echo "<label>";
                         echo "<input type='radio' name='$inputName' value='$optionValue' id='$inputId'>";
+                        echo "<span>$optionValue</span>";
+                        echo "</label>";
+
                     }
                     echo "</div>";
                     echo "</fieldset>";
@@ -86,7 +90,9 @@ $title = "First page";
             }
             $conn->close();
             ?>
-            <input class="submit" type="submit" value="Submit">
+
+            <input type="submit" value="Submit">
+
         </form>
     </div>
 </div>

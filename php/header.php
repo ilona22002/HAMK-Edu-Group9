@@ -4,13 +4,15 @@
 <head>
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <html lang="en">
     <link rel="shortcut icon" href="C:\Users\evgen\OneDrive\Рабочий стол\ezgif.com-webp-to-jpg.jpg" type="image/x-icon">
 </head>
 <body>
-
+    <header>
+        <h1>Group 9</h1>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar">
     <div class="container-fluid" style="background-color: #D4DEE5;">
@@ -59,7 +61,6 @@
     </div>
   <!-- Background image -->
 </header>
-    </header>
     <main>
 
 

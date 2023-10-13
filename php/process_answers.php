@@ -47,11 +47,23 @@ $stmt = $pdo->prepare($sql);
 
 $stmt->execute($selectedAnswers);
 ?>
+
 <div class="container">
     <div class="column">
         <h1>Your avg:</h1>
+    </div>
+    <div class="column">
+        <h1>Other avg:</h1>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Approaches to learning</h2>
+</div>
+
+<div class="container">
+    <div class="column">
         <div class="avg-container">
-            <h2>From 1 to 12:</h2>
             <div class="wrapper">
                 <div class="circle-out">
                     <div id="bar1" class="circle"></div>
@@ -59,9 +71,78 @@ $stmt->execute($selectedAnswers);
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="column">
         <div class="avg-container">
-            <h2>From 13 to 20:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar1" class="circle"></div>
+                    <span class="text" id="value1"><?php echo $averageValueFirst12; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+
+
+<div class="container">
+    <div class="feedback">
+
+        <?php
+        $point = number_format(array_sum(array_slice($selectedAnswers, 0, 12)) / 12, 2);
+        if ($point >= 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Approaches to learning' AND VALUE = 'Positive 1'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 3.5 && $point < 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Approaches to learning' AND VALUE = 'Positiv 2'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2.5 && $point < 3.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Approaches to learning' AND VALUE = 'Neutral 3'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2 && $point < 2.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Approaches to learning' AND VALUE = 'Negative 4'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point < 2){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Approaches to learning' AND VALUE = 'Negative 5'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        }        
+        ?>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Experiences of competence development</h2>
+</div>
+
+<div class="container">
+    <div class="column">
+        <div class="avg-container">
             <div class="wrapper">
                 <div class="circle-out">
                     <div id="bar4" class="circle"></div>
@@ -69,9 +150,77 @@ $stmt->execute($selectedAnswers);
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="column">
         <div class="avg-container">
-            <h2>21:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value3"><?php echo $averageValue13to20; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+
+<div class="container">
+    <div class="feedback">
+
+        <?php
+        $point = number_format(array_sum(array_slice($selectedAnswers, 12, 8)) / 8, 2);
+        if ($point >= 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of competence development' AND VALUE = 'Positive 1'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 3.5 && $point < 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of competence development' AND VALUE = 'Positiv 2'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2.5 && $point < 3.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of competence development' AND VALUE = 'Neutral 3'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2 && $point < 2.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of competence development' AND VALUE = 'Negative 4'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point < 2){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of competence development' AND VALUE = 'Negative 5'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        }        
+        ?>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Experiences of the learning environment</h2>
+</div>
+
+<div class="container">
+    <div class="column">
+        <div class="avg-container">
             <div class="wrapper">
                 <div class="circle-out">
                     <div id="bar4" class="circle"></div>
@@ -79,9 +228,78 @@ $stmt->execute($selectedAnswers);
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="column">
         <div class="avg-container">
-            <h2>From 22 to 26:</h2>
+            <div class="wrapper">
+                <div class="circle-out">
+                    <div id="bar4" class="circle"></div>
+                    <span class="text" id="value4"><?php echo $averageValue21; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="container">
+    <div class="feedback">
+
+        <?php
+        $point = number_format(array_sum(array_slice($selectedAnswers, 12, 8)) / 8, 2);
+        if ($point >= 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of the learning development' AND VALUE = 'Positive 1'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 3.5 && $point < 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of the learning development' AND VALUE = 'Positiv 2'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2.5 && $point < 3.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of the learning development' AND VALUE = 'Neutral 3'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2 && $point < 2.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of the learning development' AND VALUE = 'Negative 4'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point < 2){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Experiences of the learning development' AND VALUE = 'Negative 5'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        }        
+        ?>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Self-efficacy</h2>
+</div>
+
+<div class="container">
+    <div class="column">
+        <div class="avg-container">
             <div class="wrapper">
                 <div class="circle-out">
                     <div id="bar5" class="circle"></div>
@@ -90,40 +308,9 @@ $stmt->execute($selectedAnswers);
             </div>
         </div>
     </div>
+    
     <div class="column">
-        <h1>Other avg:</h1>
         <div class="avg-container">
-            <h2>From 1 to 12:</h2>
-            <div class="wrapper">
-                <div class="circle-out">
-                    <div id="bar1" class="circle"></div>
-                    <span class="text" id="value1"><?php echo $averageValueFirst12; ?></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="avg-container">
-            <h2>From 13 to 20:</h2>
-            <div class="wrapper">
-                <div class="circle-out">
-                    <div id="bar4" class="circle"></div>
-                    <span class="text" id="value3"><?php echo $averageValue13to20; ?></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="avg-container">
-            <h2>21:</h2>
-            <div class="wrapper">
-                <div class="circle-out">
-                    <div id="bar4" class="circle"></div>
-                    <span class="text" id="value4"><?php echo $averageValue21; ?></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="avg-container">
-            <h2>From 22 to 26:</h2>
             <div class="wrapper">
                 <div class="circle-out">
                     <div id="bar5" class="circle"></div>
@@ -132,7 +319,60 @@ $stmt->execute($selectedAnswers);
             </div>
         </div>
     </div>
+</div> 
+
+
+<div class="container">
+    <div class="feedback">
+
+        <?php
+        $point = number_format(array_sum(array_slice($selectedAnswers, 12, 8)) / 8, 2);
+        if ($point >= 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Self-efficacy' AND VALUE = 'Positive 1'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 3.5 && $point < 4.5) {
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Self-efficacy' AND VALUE = 'Positiv 2'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2.5 && $point < 3.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Self-efficacy' AND VALUE = 'Neutral 3'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point >= 2 && $point < 2.5){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Self-efficacy' AND VALUE = 'Negative 4'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        } elseif ($point < 2){
+            $sqlFeedback = "SELECT FEEDBACK FROM Feedbacks WHERE CATEGORY = 'Self-efficacy' AND VALUE = 'Negative 5'";
+            $stmtFeedback = $pdo->query($sqlFeedback);
+            if ($stmtFeedback) {
+                while ($row = $stmtFeedback->fetch(PDO::FETCH_ASSOC)) {
+                    echo $row["FEEDBACK"] . "<br>";
+                }
+            }
+        }        
+        ?>
+    </div>
 </div>
+
+
 
 <?php include "footer.php" ?>
 
