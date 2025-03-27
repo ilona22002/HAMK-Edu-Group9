@@ -6,6 +6,7 @@ As part of a **team-based project**, we designed and developed a **survey platfo
 ✅ Took on the **Scrum Master role** for the first time, facilitating Agile processes and team coordination  
 ✅ Managed tasks and documentation using **Jira & Confluence**  
 ✅ Developed the **frontend** using **HTML, CSS** 
+
 ✅ Worked with **MySQL** for database management and **Docker** for containerized environments  
 ✅ Used **Figma** for UI/UX design and wireframing  
 ✅ Collaborated through **GitHub** for version control and code reviews  
